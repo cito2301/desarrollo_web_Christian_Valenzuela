@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Información de adopción</title>
+  <link rel="stylesheet" href="./Estilos.css">
+</head>
+<body>
+  <div class="main-container">
+    <h1>Detalle de adopción</h1>
+    <p><strong>Fecha de publicación:</strong> 01/09/2025 19:01</p>
+    <p><strong>Fecha de entrega:</strong> 07/09/2025 10:00</p>
+    <p><strong>Región:</strong> Metropolitana</p>
+    <p><strong>Comuna:</strong> Santiago</p>
+    <p><strong>Sector:</strong> Parque O´higgins</p>
+    <p><strong>Cantidad:</strong> 2</p>
+    <p><strong>Tipo:</strong> Gatos</p>
+    <p><strong>Edad:</strong> 3 meses</p>
+    <p><strong>Fotos:</strong></p>
+    <img src=png/Gato2.png alt="Gato" class="fotoLista" onclick="mostrarGrande(this.src)">
+    <img src=png/Gato3.png alt="Gato" class="fotoLista" onclick="mostrarGrande(this.src)">
+    <img src=png/Gato4.png alt="Gato" class="fotoLista" onclick="mostrarGrande(this.src)">
+    <br><br>
+    <div id="fotoGrande" style="display:none;">
+      <img id="imgAmpliada" src="" alt="Foto ampliada" class="fotoGran"><br>
+      <button onclick="cerrarGrande()">Cerrar</button>
+    </div>
+    <button onclick="window.location.href='Listado.html'">Volver al listado</button>
+    <button onclick="window.location.href='Portada.html'">Volver a la portada</button>
+  </div>
+  <script src="./js/funciones.js"></script>
+</body>
+</html>

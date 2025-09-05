@@ -1,0 +1,3 @@
+# En la tarea se usó validaciones para los campos obligatorios y para las longitudes de los campos opcionales
+# Se usó funciones.js para la mayoría de funciones en los distintos html, como los selectores (Regiones, comuna, contactar), imágene, campos como las fechas, etc
+# Lás imágenes png de animales fueron sacadas de https://pixabay.com/ donde se encuentran imágenes sin copyright, y los gráficos fueron creados en excel con datos inventados
