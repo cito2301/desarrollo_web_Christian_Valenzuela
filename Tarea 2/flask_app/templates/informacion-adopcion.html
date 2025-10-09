@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Información de adopción{% endblock %}
+{% block content %}
+<h1>Detalle de adopción</h1>
+
+{% if aviso %}
+<p><strong>Fecha publicación:</strong> {{ aviso.fecha_publicacion.strftime('%d/%m/%Y %H:%M') }}</p>
+<p><strong>Fecha entrega:</strong> {{ aviso.fecha_entrega.strftime('%d/%m/%Y %H:%M') }}</p>
+<p><strong>Región:</strong> {{ aviso.region }}</p>
+<p><strong>Comuna:</strong> {{ aviso.comuna }}</p>
+<p><strong>Sector:</strong> {{ aviso.sector }}</p>
+<p><strong>Cantidad:</strong> {{ aviso.cantidad }}</p>
+<p><strong>Tipo:</strong> {{ aviso.tipo }}</p>
+<p><strong>Edad:</strong> {{ aviso.edad }} {{ aviso.unidad }}</p>
+<p><strong>Descripción:</strong> {{ aviso.descripcion }}</p>
+{% else %}
+<p>No se encontró la información de esta adopción.</p>
+{% endif %}
+
+<br>
+<a href="{{ url_for('listado') }}">Volver al listado</a>
+<a href="{{ url_for('portada') }}">Volver a portada</a>
+{% endblock %}
