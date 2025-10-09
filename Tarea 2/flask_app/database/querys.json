@@ -1,0 +1,16 @@
+{
+  "select_regiones": "SELECT * FROM region ORDER BY nombre",
+  "select_comunas_by_region": "SELECT id, nombre FROM comuna WHERE region_id = %s ORDER BY nombre",
+  "insert_aviso_adopcion": "INSERT INTO aviso_adopcion (fecha_ingreso, comuna_id, sector, nombre, email, celular, tipo, cantidad, edad, unidad_medida, fecha_entrega, descripcion) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
+  "insert_foto": "INSERT INTO foto (ruta_archivo, nombre_archivo, aviso_id) VALUES (%s, %s, %s)",
+  "insert_contacto": "INSERT INTO contactar_por (nombre, identificador, aviso_id) VALUES (%s, %s, %s)",
+  "select_ultimos_avisos": "SELECT aa.*, c.nombre as comuna_nombre, r.nombre as region_nombre FROM aviso_adopcion aa JOIN comuna c ON aa.comuna_id = c.id JOIN region r ON c.region_id = r.id ORDER BY aa.fecha_ingreso DESC LIMIT %s",
+  "select_aviso_by_id": "SELECT aa.*, c.nombre as comuna_nombre, r.nombre as region_nombre FROM aviso_adopcion aa JOIN comuna c ON aa.comuna_id = c.id JOIN region r ON c.region_id = r.id WHERE aa.id = %s",
+  "select_fotos_by_aviso": "SELECT * FROM foto WHERE aviso_id = %s",
+  "select_contactos_by_aviso": "SELECT * FROM contactar_por WHERE aviso_id = %s",
+  "count_avisos": "SELECT COUNT(*) as total FROM aviso_adopcion",
+  "select_avisos_paginados": "SELECT aa.*, c.nombre as comuna_nombre, r.nombre as region_nombre FROM aviso_adopcion aa JOIN comuna c ON aa.comuna_id = c.id JOIN region r ON c.region_id = r.id ORDER BY aa.fecha_ingreso DESC LIMIT %s OFFSET %s",
+  "select_estadisticas_tipo": "SELECT tipo, COUNT(*) as cantidad FROM aviso_adopcion GROUP BY tipo",
+  "select_estadisticas_region": "SELECT r.nombre, COUNT(*) as cantidad FROM aviso_adopcion aa JOIN comuna c ON aa.comuna_id = c.id JOIN region r ON c.region_id = r.id GROUP BY r.id, r.nombre ORDER BY cantidad DESC",
+  "select_estadisticas_mes": "SELECT DATE_FORMAT(fecha_ingreso, '%Y-%m') as mes, COUNT(*) as cantidad FROM aviso_adopcion GROUP BY mes ORDER BY mes DESC LIMIT 12"
+}
