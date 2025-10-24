@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Portada{% endblock %}
+{% block content %}
+  <h1>🐕 Bienvenido a la página de adopciones 🐈</h1>
+  <h2>Estos son los últimos 5 avisos</h2>
+  <table>
+    <tr>
+      <th>Fecha publicación</th><th>Comuna</th><th>Sector</th><th>Cantidad, Tipo y Edad</th>
+    </tr>
+    {% for a in avisos %}
+      <tr>
+        <td>{{ a[1] }}</td>
+        <td>{{ a[2] }}</td>
+        <td>{{ a[3] if a[3] else "No especifica" }}</td>
+        <td>{{ a[4] }}, {{ a[5] }}, {{ a[6] }} {% if a[7]=='m' %}{% if a[6]==1 %}mes{% else %}meses{% endif %}{% else %}{% if a[6]==1 %}año{% else %}años{% endif %}{% endif %}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

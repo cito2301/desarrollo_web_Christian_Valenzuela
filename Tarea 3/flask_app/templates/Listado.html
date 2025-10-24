@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Listado de avisos{% endblock %}
+{% block content %}
+  <h1>Listado de avisos</h1>
+  <h3>Haga click en una fila para más información</h3>
+  <table id="tabla-adopciones">
+    <thead><tr>
+      <th>Fecha publicación</th><th>Fecha entrega</th><th>Comuna</th><th>Sector</th><th>Cantidad, Tipo y Edad</th><th>Total Fotos</th>
+    </tr></thead>
+    <tbody>
+    {% for a in avisos %}
+      <tr onclick='window.location.href="{{ url_for("info_aviso", aviso_id=a[0]) }}"'>
+        <td>{{ a[1] }}</td><td>{{ a[2] }}</td><td>{{ a[3] }}</td><td>{{ a[4] if a[4] else "No especifica"}}</td><td>{{ a[5] }}</td><td>{{ a[6] }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <div>
+    {% if prev_url %}<a href="{{ prev_url }}">Anterior</a>{% endif %}
+    {% if next_url %}<a href="{{ next_url }}">Siguiente</a>{% endif %}
+  </div>
+{% endblock %}

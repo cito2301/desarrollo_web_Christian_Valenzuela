@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Adopciones{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/Estilos.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('portada') }}">Portada</a> |
+    <a href="{{ url_for('agregar') }}">Agregar aviso</a> |
+    <a href="{{ url_for('listado') }}">Ver listado</a> |
+    <a href="{{ url_for('estadisticas') }}">Estadísticas</a>
+  </nav>
+  <main class="main-container">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

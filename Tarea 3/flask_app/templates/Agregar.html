@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title %}Agregar Aviso{% endblock %}
+{% block content %}
+<h1>Agregar Aviso de Adopción</h1>
+
+{% if errors %}
+  <div style="color:red;">Errores: {{ errors }}</div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+  <fieldset>
+    <legend>¿Dónde?</legend>
+    <label>Región</label>
+    <select name=region id="region-select">
+      <option value="">Seleccione región</option>
+      {% for r in regiones %}
+        <option value="{{ r[0] }}">{{ r[1] }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Comuna</label>
+    <select name="comuna_id" id="comuna-select">
+      <option value="">Seleccione comuna</option>
+      {% for com in comunas %}
+        <option value="{{ com[0] }}" data-region="{{ com[2] }}">{{ com[1] }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Sector</label>
+    <input name="sector" value="{{ form.sector if form else '' }}">
+  </fieldset>
+
+  <fieldset>
+    <legend>Contacto</legend>
+    <label>Nombre</label><input name="nombre" value="{{ form.nombre if form else '' }}" required>
+    <label>Email</label><input name="email" type="email" value="{{ form.email if form else '' }}" required>
+    <label>Celular</label><input name="celular" value="{{ form.celular if form else '' }}">
+    <label>Contactar por</label>
+    <select id="red" name="red">
+      <option value="">Seleccione</option>
+      <option>WhatsApp</option><option>Instagram</option><option>Telegram</option><option>X</option><option>TikTok</option><option>Otra</option>
+    </select>
+    <button type="button" onclick="agregarContacto()">Agregar</button>
+    <div id="contactos"></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Mascota</legend>
+    <label>Tipo</label>
+    <select name="tipo">
+      <option value="">Seleccione</option><option value="gato">Gato</option><option value="perro">Perro</option>
+    </select>
+    <label>Cantidad</label><input name="cantidad" type="number" min="1">
+    <label>Edad</label><input name="edad" type="number" min="0">
+    <select name="unidad"><option value="m">meses</option><option value="a">años</option></select>
+    <label>Fecha entrega</label><input type="datetime-local" name="fecha" id="fecha">
+    <label>Descripción</label><textarea name="descripcion" rows="6"></textarea>
+
+    <label>Fotos</label>
+    <div id="photo-inputs">
+      <input type="file" name="fotos" accept="image/*" class="foto-input"><br>
+    </div>
+    <button type="button" id="add-photo-btn">Agregar otra foto</button>
+  </fieldset>
+
+  <button type="submit">Agregar aviso</button>
+</form>
+
+<script src="{{ url_for('static', filename='js/funciones.js') }}"></script>
+<script src="{{ url_for('static', filename='js/validaciones.js') }}"></script>
+{% endblock %}

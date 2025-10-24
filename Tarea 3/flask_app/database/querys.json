@@ -1,0 +1,17 @@
+{
+  "insert_aviso": "INSERT INTO aviso_adopcion (fecha_ingreso, comuna_id, sector, nombre, email, celular, tipo, cantidad, edad, unidad_medida, fecha_entrega, descripcion) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);",
+  "insert_foto": "INSERT INTO foto (ruta_archivo, nombre_archivo, aviso_id) VALUES (%s,%s,%s);",
+  "insert_contactar_por": "INSERT INTO contactar_por (nombre, identificador, aviso_id) VALUES (%s,%s,%s);",
+  "get_last_avisos": "SELECT a.id, a.fecha_ingreso, c.nombre AS comuna, a.sector, a.cantidad, a.tipo, a.edad, a.unidad_medida FROM aviso_adopcion a JOIN comuna c ON a.comuna_id = c.id ORDER BY a.fecha_ingreso DESC LIMIT %s;",
+  "get_avisos_paginated": "SELECT a.id, a.fecha_ingreso, a.fecha_entrega, c.nombre AS comuna, a.sector, CONCAT(a.cantidad, ', ', a.tipo, ', ', a.edad, CASE WHEN a.unidad_medida='m' AND a.edad=1 THEN ' mes' WHEN a.unidad_medida='m' AND a.edad>1 THEN ' meses' WHEN a.unidad_medida='a' AND a.edad=1 THEN ' año' ELSE ' años' END) AS resumen, (SELECT COUNT(*) FROM foto f WHERE f.aviso_id = a.id) AS total_fotos FROM aviso_adopcion a JOIN comuna c ON a.comuna_id = c.id ORDER BY a.fecha_ingreso DESC LIMIT %s OFFSET %s;",
+  "get_aviso_by_id": "SELECT a.id, a.fecha_ingreso, a.fecha_entrega, r.nombre AS region, c.nombre AS comuna, a.sector, a.nombre, a.email, a.celular, a.tipo, a.cantidad, a.edad, a.unidad_medida, a.descripcion FROM aviso_adopcion a JOIN comuna c ON a.comuna_id = c.id JOIN region r ON c.region_id = r.id WHERE a.id = %s;",
+  "get_fotos_by_aviso": "SELECT ruta_archivo, nombre_archivo FROM foto WHERE aviso_id = %s;",
+  "get_contactos_by_aviso": "SELECT nombre, identificador FROM contactar_por WHERE aviso_id = %s;",
+  "insert_comment": "INSERT INTO comentario (nombre, texto, fecha, aviso_id) VALUES (%s,%s,%s,%s);",
+  "get_comments_by_aviso": "SELECT nombre, texto, fecha FROM comentario WHERE aviso_id = %s ORDER BY fecha DESC;",
+  "get_regions": "SELECT id, nombre FROM region ORDER BY nombre;",
+  "get_comunas": "SELECT id, nombre, region_id FROM comuna ORDER BY nombre;",
+  "stats_avisos_por_dia": "SELECT DATE(fecha_ingreso) as dia, COUNT(*) FROM aviso_adopcion GROUP BY DATE(fecha_ingreso) ORDER BY DATE(fecha_ingreso);",
+  "stats_por_tipo": "SELECT tipo, COUNT(*) FROM aviso_adopcion GROUP BY tipo;",
+  "stats_por_mes_tipo": "SELECT MONTH(fecha_ingreso) as mes, tipo, COUNT(*) AS cnt FROM aviso_adopcion GROUP BY MONTH(fecha_ingreso), tipo ORDER BY MONTH(fecha_ingreso);"
+}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Detalle aviso{% endblock %}
+{% block content %}
+  <h1>Detalle de adopción</h1>
+
+  {% if aviso %}
+    <p><strong>Fecha publicación:</strong> {{ aviso[1] }}</p>
+    <p><strong>Fecha entrega:</strong> {{ aviso[2] }}</p>
+    <p><strong>Región:</strong> {{ aviso[3] }}</p>
+    <p><strong>Comuna:</strong> {{ aviso[4] }}</p>
+    <p><strong>Sector:</strong> {{ aviso[5] if aviso[5] else "No especifica" }}</p>
+    <p><strong>Contacto:</strong> {{ aviso[6] }} - {{ aviso[7] }}</p>
+    <p><strong>Tipo:</strong> {{ aviso[9] }}</p>
+    <p><strong>Cantidad:</strong> {{ aviso[10] }}</p>
+    <p><strong>Edad:</strong> {{ aviso[11] }} {% if aviso[12]=='m' %}{% if aviso[11]==1 %}mes{% else %}meses{% endif %}{% else %}{% if aviso[11]==1 %}año{% else %}años{% endif %}{% endif %}</p>
+    <p><strong>Descripción:</strong> {{ aviso[13] }}</p>
+
+    <h3>Fotos</h3>
+  <div id="galeria">
+    {% for f in fotos %}
+      <img src="{{ url_for('static', filename=f[0]) }}" 
+         alt="Foto aviso" 
+         class="fotoLista" 
+         onclick="mostrarGrande(this.src)">
+    {% endfor %}
+  </div>
+
+  <div id="fotoGrande" style="display:none; text-align:center;">
+    <img id="imgAmpliada" class="fotoGran">
+    <br>
+    <button type="button" onclick="cerrarGrande()">Cerrar</button>
+  </div>
+
+    <h3>Contactos</h3>
+    <ul>
+      {% for c in contactos %}
+        <li>{{ c[0] }}: {{ c[1] }}</li>
+      {% endfor %}
+    </ul>
+
+    <h3>Agregar comentario</h3>
+    <form id="commentForm">
+      <input type="text" id="c_nombre" placeholder="Nombre" minlength="3" maxlength="80" required>
+      <textarea id="c_texto" rows="4" cols="50" minlength="5" required></textarea>
+      <button type="submit">Agregar comentario</button>
+    </form>
+
+    <h3>Comentarios</h3>
+    <ul id="commentList">
+      {% for com in comentarios %}
+        <li><strong>{{ com[0] }}</strong> ({{ com[2] }}): {{ com[1] }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <script>
+    const avisoId = {{ aviso[0] }};
+  </script>
+  <script defer src="{{ url_for('static', filename='js/add-comment.js') }}"></script>
+  <script defer src="{{ url_for('static', filename='js/funciones.js') }}"></script>
+{% endblock %}

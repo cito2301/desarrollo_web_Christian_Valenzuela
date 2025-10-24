@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Estadísticas{% endblock %}
+{% block content %}
+  <h1>Estadísticas de adopciones</h1>
+
+  <h2>Avisos por día</h2>
+  <div id="chart-dia" style="height:400px;"></div>
+
+  <h2>Avisos por tipo</h2>
+  <div id="chart-tipo" style="height:400px;"></div>
+
+  <h2>Avisos por mes (gato vs perro)</h2>
+  <div id="chart-mes" style="height:400px;"></div>
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="{{ url_for('static', filename='js/stats-avisos.js') }}"></script>
+{% endblock %}
