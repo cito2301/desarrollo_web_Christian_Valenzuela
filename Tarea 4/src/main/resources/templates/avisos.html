@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Avisos</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+  <nav>
+    <a th:href="@{/avisos}">Avisos</a> |
+    <a th:href="@{/}">Inicio</a>
+  </nav>
+
+  <main class="main-container">
+    <h1>Listado de avisos</h1>
+    <table id="tabla-avisos">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Sector</th>
+          <th>Cantidad, Tipo y Edad</th>
+          <th>Comuna</th>
+          <th>Nota</th>
+          <th>Evaluar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="a : ${avisos}">
+          <td th:text="${a.id}"></td>
+          <td th:text="${a.fechaStr}"></td>
+          <td th:text="${a.sector}"></td>
+          <td th:text="${a.cantidad} + ' ' + ${a.tipo} + ', ' + ${a.edadStr}"></td>
+          <td th:text="${a.comuna}"></td>
+
+          <td id="nota-[[${a.id}]]"
+              th:text="${a.promedioNota != null} ? ${a.promedioNota} : '-' ">
+          </td>
+
+          <td>
+            <small id="count-[[${a.id}]]"
+                   th:text="${a.contadorNotas != null and a.contadorNotas > 0} ?
+                            |(${a.contadorNotas} votos)| : ''">
+            </small>
+            <br>
+
+            <button type="button"
+                    th:attr="onclick=|evaluar(${a.id})|">
+              Evaluar
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <script th:src="@{/js/evaluate.js}"></script>
+</body>
+</html>

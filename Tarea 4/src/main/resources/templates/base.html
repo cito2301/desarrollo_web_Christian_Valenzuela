@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:replace="~{::title}">Adopciones</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+  <nav>
+    <a th:href="@{/avisos}">Avisos</a> |
+    <a th:href="@{/}">Inicio</a>
+  </nav>
+  <main class="main-container">
+    <div th:replace="~{::content}"></div>
+  </main>
+</body>
+</html>
